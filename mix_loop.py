@@ -14,9 +14,7 @@ for murid,markah in zip(students, scores) :
 for markah in scores :
     if markah >= min_pass :
         lulus += 1
-
-for markah in scores :
-    if markah < min_pass :
+    else :
         gagal += 1 
 
 print(f'\nJumlah pelajar lulus: {lulus}')
