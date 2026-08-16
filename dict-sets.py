@@ -73,18 +73,18 @@
 
 # print(fail_ditambah, fail_dibuang)
 
-semua_produk = {
-    'Laptop': 'Elektronik',
-    'Roti': 'Makanan',
-    'Telefon': 'Elektronik',
-    'Susu': 'Makanan',
-    'Tablet': 'Elektronik'
-}
-kategori_dicari = 'Elektronik'
-elektronik = set()
+# semua_produk = {
+#     'Laptop': 'Elektronik',
+#     'Roti': 'Makanan',
+#     'Telefon': 'Elektronik',
+#     'Susu': 'Makanan',
+#     'Tablet': 'Elektronik'
+# }
+# kategori_dicari = 'Elektronik'
+# elektronik = set()
 
-for key, value in semua_produk.items() :
-    if value == kategori_dicari :
-        elektronik.add(key)
+# for key, value in semua_produk.items() :
+#     if value == kategori_dicari :
+#         elektronik.add(key)
 
-print(elektronik)
+# print(elektronik)
