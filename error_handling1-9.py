@@ -74,22 +74,42 @@
 
 # print(dapatkan_port(server_config, 'server5'))
 # dapatkan_port(server_config, 'server2')
-senarai_log = ['Isnin: OK', 'Selasa: Error', 'Rabu: OK']
+# senarai_log = ['Isnin: OK', 'Selasa: Error', 'Rabu: OK']
 
-def dapatkan_log_hari(senarai_log, index_hari):
-    try : 
-        if len(senarai_log) <= index_hari : 
-            raise IndexError(f"log hari ke{index_hari} belum disenarai")
+# def dapatkan_log_hari(senarai_log, index_hari):
+#     try : 
+#         if len(senarai_log) <= index_hari : 
+#             raise IndexError(f"log hari ke{index_hari} belum disenarai")
 
-    except IndexError as error : 
-        return error
+#     except IndexError as error : 
+#         return error
 
-    hari_yg_diinginkan = senarai_log[index_hari]
-    return hari_yg_diinginkan
+#     hari_yg_diinginkan = senarai_log[index_hari]
+#     return hari_yg_diinginkan
 
-print(dapatkan_log_hari(senarai_log, 0))
-print(dapatkan_log_hari(senarai_log, 2)) 
-print(dapatkan_log_hari(senarai_log, 5))
+# print(dapatkan_log_hari(senarai_log, 0))
+# print(dapatkan_log_hari(senarai_log, 2)) 
+# print(dapatkan_log_hari(senarai_log, 5))
 
-        
-        
+class InsufficientFundsError(Exception):
+    def __init__(self, baki_akaun ,jumlah_keluar,) :  
+        kurang_berapa = jumlah_keluar - baki_akaun
+        self.kurang_berapa = kurang_berapa
+        self.baki_akaun = baki_akaun
+        self.jumlah_keluar = jumlah_keluar
+
+def keluarkan_wang(baki_akaun, jumlah_keluar): 
+    try :
+        if baki_akaun < jumlah_keluar :
+            raise InsufficientFundsError(baki_akaun, jumlah_keluar)
+    except InsufficientFundsError as error : 
+        return f'baki tidak cukup lagi {error.kurang_berapa}'
+
+    akaun_semasa = baki_akaun - jumlah_keluar 
+    return f'akaun semasa: {akaun_semasa}'
+
+
+print(keluarkan_wang(1000, 500))    # baki cukup, ada baki lebih - expect BERJAYA
+print(keluarkan_wang(1000, 1500))   # baki tak cukup - expect GAGAL
+print(keluarkan_wang(500, 500))     # keluar SEMUA baki - expect GAGAL (sebab akaun tak boleh 0)
+    
