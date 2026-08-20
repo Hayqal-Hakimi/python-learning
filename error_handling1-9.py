@@ -127,21 +127,42 @@
 #         raise ValueError('gagal simpan data ke database') from e
 # print(simpan_data(database, 'user2')) 
    
-database_pengguna = {
-    'ali123': 'password123',
-    'aina456': 'kucing789'
-} 
+# database_pengguna = {
+#     'ali123': 'password123',
+#     'aina456': 'kucing789'
+# } 
 
-def login(username, password, database_pengguna):
+# def login(username, password, database_pengguna):
+#     try:
+#         password_sebenar = database_pengguna[username]
+#         if password_sebenar == password : 
+#             return 'berjaya login' 
+#         else : 
+#             return 'password salah'
+#     except ValueError:
+#         raise ValueError('Username atau password salah.') from None
+# print(login('ali123', 'password123', database_pengguna))  # username BETUL, password BETUL - BERJAYA
+# print(login('ali123', 'salahpassword', database_pengguna))  # username BETUL, password SALAH - GAGAL
+# print(login('hacker99', 'apa-apa', database_pengguna))     # username TAK WUJUD - GAGAL (trigger KeyError)
+
+database_pengguna = {
+    'ali123': {'password': 'password123', 'nama': 'Ali bin Ahmad', 'cubaan_gagal': 0},
+    'aina456': {'password': 'kucing789', 'nama': 'Aina binti Hassan', 'cubaan_gagal': 0}
+}
+
+def cuba_login(username, password_input, database_pengguna):
+
     try:
-        password_sebenar = database_pengguna[username]
-        if password_sebenar == password : 
-            return 'berjaya login' 
-        else : 
-            return 'password salah'
-    except ValueError:
+
+        rekod_pengguna = database_pengguna[username]
+        if password_input != rekod_pengguna['password'] : 
+            raise ValueError('Username atau password salah.') from None
+        return f'login berjaya dgn nama {rekod_pengguna['nama']}'
+
+    except KeyError:
         raise ValueError('Username atau password salah.') from None
-    return ValueError
-print(login('ali123', 'password123', database_pengguna))  # username BETUL, password BETUL - BERJAYA
-print(login('ali123', 'salahpassword', database_pengguna))  # username BETUL, password SALAH - GAGAL
-print(login('hacker99', 'apa-apa', database_pengguna))     # username TAK WUJUD - GAGAL (trigger KeyError)
+
+try : 
+    print(cuba_login('ali123', 'password123', database_pengguna))
+except ValueError as error :
+    print(f"error yang ada ialah {error}")
