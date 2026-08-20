@@ -113,16 +113,35 @@
 # print(keluarkan_wang(1000, 1500))   # baki tak cukup - expect GAGAL
 # print(keluarkan_wang(500, 500))     # keluar SEMUA baki - expect GAGAL (sebab akaun tak boleh 0)
     
-database = {
-    'user1': {'nama': 'Ali', 'umur': 17},
-    'user2': {'nama': 'Aina'}  # TIADA 'umur'!
-}
+# database = {
+#     'user1': {'nama': 'Ali', 'umur': 17},
+#     'user2': {'nama': 'Aina'}  # TIADA 'umur'!
+# }
 
-def simpan_data(database, key):
-    try:
-        umur = database[key]['umur']
-        return umur
+# def simpan_data(database, key):
+#     try:
+#         umur = database[key]['umur']
+#         return umur
     
-    except KeyError as e:
-        raise ValueError('gagal simpan data ke database') from e
-print(simpan_data(database, 'user2'))    
+#     except KeyError as e:
+#         raise ValueError('gagal simpan data ke database') from e
+# print(simpan_data(database, 'user2')) 
+   
+database_pengguna = {
+    'ali123': 'password123',
+    'aina456': 'kucing789'
+} 
+
+def login(username, password, database_pengguna):
+    try:
+        password_sebenar = database_pengguna[username]
+        if password_sebenar == password : 
+            return 'berjaya login' 
+        else : 
+            return 'password salah'
+    except ValueError:
+        raise ValueError('Username atau password salah.') from None
+    return ValueError
+print(login('ali123', 'password123', database_pengguna))  # username BETUL, password BETUL - BERJAYA
+print(login('ali123', 'salahpassword', database_pengguna))  # username BETUL, password SALAH - GAGAL
+print(login('hacker99', 'apa-apa', database_pengguna))     # username TAK WUJUD - GAGAL (trigger KeyError)
