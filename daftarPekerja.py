@@ -1,3 +1,5 @@
+import random
+
 senarai_pekerja_baharu = [
     {'nama': 'Ali bin Ahmad', 'email': 'ali@syarikat.com', 'umur': 25, 'jabatan': 'IT'},
     {'nama': 'Aina binti Hassan', 'email': 'aina-tiada-at.com', 'umur': 30, 'jabatan': 'HR'},
@@ -26,17 +28,17 @@ def validate_pekerja(rekod):
     
 
 def daftar_ke_sistem(rekod):
-    # simulasi sambungan gagal SECARA RAWAK guna 'random' module
-    # import random di atas fail; random.random() < 0.5 anggap "sambungan gagal"
-    # raise SambunganGagalError kalau gagal simulasi
-    # kalau berjaya, return mesej/rekod berjaya
+    peratus = random.random()
+    if not peratus >= 0.5 : 
+        raise SambunganGagalError()
+    return f"rekod untuk {rekod['nama']} berjaya didaftar"
     
 
 def proses_onboarding(senarai_pekerja):
     for rekod in senarai_pekerja : 
         validate_pekerja(rekod)
         daftar_ke_sistem(rekod)
-    # loop setiap rekod
+
     # untuk setiap rekod: retry MAKSIMUM 3 kali HANYA untuk SambunganGagalError
     # DataTidakSahError -> terus masuk senarai gagal, JANGAN retry
     # guna while + try + except + else + finally
