@@ -145,24 +145,54 @@
 # print(login('ali123', 'salahpassword', database_pengguna))  # username BETUL, password SALAH - GAGAL
 # print(login('hacker99', 'apa-apa', database_pengguna))     # username TAK WUJUD - GAGAL (trigger KeyError)
 
-database_pengguna = {
-    'ali123': {'password': 'password123', 'nama': 'Ali bin Ahmad', 'cubaan_gagal': 0},
-    'aina456': {'password': 'kucing789', 'nama': 'Aina binti Hassan', 'cubaan_gagal': 0}
-}
+# database_pengguna = {
+#     'ali123': {'password': 'password123', 'nama': 'Ali bin Ahmad', 'cubaan_gagal': 0},
+#     'aina456': {'password': 'kucing789', 'nama': 'Aina binti Hassan', 'cubaan_gagal': 0}
+# }
 
-def cuba_login(username, password_input, database_pengguna):
+# def cuba_login(username, password_input, database_pengguna):
 
-    try:
+#     try:
 
-        rekod_pengguna = database_pengguna[username]
-        if password_input != rekod_pengguna['password'] : 
-            raise ValueError('Username atau password salah.') from None
-        return f'login berjaya dgn nama {rekod_pengguna['nama']}'
+#         rekod_pengguna = database_pengguna[username]
+#         if password_input != rekod_pengguna['password'] : 
+#             raise ValueError('Username atau password salah.') from None
+#         return f'login berjaya dgn nama {rekod_pengguna['nama']}'
 
-    except KeyError:
-        raise ValueError('Username atau password salah.') from None
+#     except KeyError:
+#         raise ValueError('Username atau password salah.') from None
 
-try : 
-    print(cuba_login('ali123', 'password123', database_pengguna))
-except ValueError as error :
-    print(f"error yang ada ialah {error}")
+# try : 
+#     print(cuba_login('ali123', 'password123', database_pengguna))
+# except ValueError as error :
+#     print(f"error yang ada ialah {error}")
+
+# def proses_fail_upload(nama_fail, kandungan_fail, saiz_dimuat, saiz_penuh):
+#     try:
+#         if not kandungan_fail : 
+#             raise ValueError('Kandungan File tiada ')
+#         if not isinstance(kandungan_fail, str) : 
+#             raise TypeError('Jenis data file tidak sah')
+#         peratus = (saiz_dimuat / saiz_penuh) * 100
+#         return f'{nama_fail} berjaya dimasukkan dengan peratus {peratus}%'
+#     except (ValueError, TypeError) as e:
+#         print(e)
+#     except ZeroDivisionError:
+#         print('saiz perlu la melebihi 0')
+
+
+# # Test 1: BERJAYA (semua sah)
+# print(proses_fail_upload("laporan.txt", "Ini kandungan fail", 50, 100))
+# # jangkaan: berjaya, peratus 50%
+
+# # Test 2: Fail KOSONG -> ValueError
+# print(proses_fail_upload("takkosong.txt", "   ", 0, 100))
+# # jangkaan: ditolak (fail kosong)
+
+# # Test 3: Jenis fail SALAH (bukan string) -> TypeError
+# proses_fail_upload("gambar.png", 12345, 50, 100)
+# # jangkaan: ditolak (jenis fail tak disokong)
+
+# # Test 4: saiz_penuh = 0 -> ZeroDivisionError
+# proses_fail_upload("rosak.txt", "ada isi", 50, 0)
+# # jangkaan: amaran sistem (bukan fail ditolak)
